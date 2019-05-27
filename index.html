@@ -1,0 +1,151 @@
+<!Doctype html>
+<html lang="zh-Hant-TW">
+<head>
+    <title>地球軌道</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+
+      html, body{
+        height:100%;
+        overflow: hidden;
+      }
+
+      #universe {
+        background: radial-gradient(#555, #000);
+
+      }
+
+      @-webkit-keyframes starFlash {
+        from{opacity: 1;}
+        to{opacity: 0.3}
+      }
+
+      @keyframes starFlash {
+        from{opacity: 1;}
+        to{opacity: 0.3}
+      }
+
+      #stars{
+        height:100%;
+        background-image: url("stars.png");
+        background-size: cover;
+        -webkit-animation: starFlash 2s infinite alternate;
+                animation: starFlash 2s infinite alternate;
+      }
+
+      @-webkit-keyframes sunlight {
+        from{-webkit-box-shadow: 0 0 45px #f5c91a;box-shadow: 0 0 45px #f5c91a}
+        to{-webkit-box-shadow: 0 0 90px #f5c91a;box-shadow: 0 0 90px #f5c91a}
+      }
+
+      @keyframes sunlight {
+        from{-webkit-box-shadow: 0 0 45px #f5c91a;box-shadow: 0 0 45px #f5c91a}
+        to{-webkit-box-shadow: 0 0 90px #f5c91a;box-shadow: 0 0 90px #f5c91a}
+      }
+
+      #sun{
+        height:200px;
+        width:200px;
+        background: radial-gradient(#f5c313,#ec7e08);
+
+        position: absolute;
+        top:50%;
+        right: 50%;
+        margin-top: -100px;
+        margin-right: -100px;
+
+        border-radius: 100px;
+        opacity: 0.8;
+
+        -webkit-box-shadow: 0 0 45px #f5c91a;
+
+                box-shadow: 0 0 45px #f5c91a;
+        -webkit-animation: sunlight 4s infinite alternate;
+                animation: sunlight 4s infinite alternate;
+      }
+
+      @-webkit-keyframes spin {
+        from{-webkit-transform:rotate(0);transform:rotate(0)}
+        to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+      }
+
+      @keyframes spin {
+        from{-webkit-transform:rotate(0);transform:rotate(0)}
+        to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+      }
+
+
+      #earthOrbit{
+        height:600px;
+        width:600px;
+        /* border: 1px solid red; */
+
+        position: absolute;
+        top:50%;
+        right:50%;
+        margin-top:-300px;
+        margin-right:-300px;
+
+        border-radius: 300px;
+
+        -webkit-animation: spin 30s linear infinite;
+
+                animation: spin 30s linear infinite;
+      }
+
+      #earth{
+        position:absolute;
+        top:50%;
+
+        margin-top: -40px;
+        margin-left:-40px;
+        /* margin-right: -40px;*/
+
+        -webkit-animation: spin 20s linear infinite;
+
+                animation: spin 20s linear infinite;
+      }
+      #moonOrbit{
+        width:120px;
+        height:120px;
+        /* border:1px solid red; */
+        border-radius: 60px;
+
+        position:absolute;
+        top:50%;
+        margin-top:-60px;
+        margin-left:-60px;
+        -webkit-animation:  spin 20s linear infinite;
+                animation:  spin 20s linear infinite;
+      }
+      #moon{
+        height:20px;
+        width:20px;
+        background-color: grey;
+        border-radius: 10px;
+
+        position:absolute;
+        top:50%;
+        margin-top:-10px;
+        margin-left:-10px;
+      }
+
+    </style>
+</head>
+
+<body id="universe">
+
+  <div id="stars"></div>
+  <div id="sun"></div>
+  <div id="earthOrbit">
+    <img id="earth" src="earth.png" alt="e" width="80px;" height="80px">
+    <div id="moonOrbit">
+      <div id="moon"></div>
+    </div>
+  </div>
+
+</body>
+</html>
