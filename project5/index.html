@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <title>反應遊戲</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    :root{
+      --bound; /*設定css變數 利用js填入會變動的值*/
+    }
+
+
+    body{
+      background-color: rgba(255,94,100,0.5);
+      color:#FF3683;
+    }
+    .bold{
+      font-weight: bold;
+    }
+
+    #box{
+      width:var(--bound); /*寬度與高度填入root設定好的變數中的值 */
+      height:var(--bound);
+      background-color: red;
+      display: none;
+      position: relative;
+    }
+
+    </style>
+</head>
+
+<body>
+  <h1>考考你的反應</h1>
+  <p class="bold">反應時間：<span id="time">0</span>秒</p>
+  <div id="box"></div>
+
+
+
+
+  <script type="text/javascript">
+  var creattime; //先建立變數
+  var clicktime;
+  var reacttime;
+
+  function makebox(){
+    var time = Math.random() //time變數中存入隨機數字 Math.random會產生0-1的數字
+    time = time*3000;
+    //time變數中存入原time*3000毫秒 表示time為0-3秒間
+    setTimeout(function(){
+      if(Math.random()>=0.5){
+        document.getElementById('box').style.borderRadius="70px";
+      }else{
+        document.getElementById('box').style.borderRadius="0px";
+      }
+      //讓id是box的div隨機變成圓形或正方形
+      var top = Math.floor(Math.random()*(window.innerHeight-280));
+      var left = Math.floor(Math.random()*(window.innerWidth-280));
+      //回傳網頁高度 設定box出現位置的邊界 隨機產生0至邊界高度與寬度的整數值
+      var dynamicBound;
+      if (window.innerWidth > window.innerHeight){
+          dynamicBound = window.innerWidth/8;
+      }else{
+          dynamicBound = window.innerHeight/8;
+      }
+      dynamicBound = dynamicBound + "px";
+      document.documentElement.style.setProperty("--bound",dynamicBound);
+      //將css的變數--bound填入會依視窗尺寸而改變的值 使box會隨視窗尺寸改變大小 方便點選
+      document.getElementById('box').style.top=top + "px";
+      document.getElementById('box').style.left=left + "px";
+      //使box的位置隨機移動
+      document.getElementById('box').style.backgroundColor=getRandomcolor();//box設定隨機顏色
+      document.getElementById('box').style.display="block";
+      creattime=Date.now() //紀錄當下產生box的時間 Date.now()回傳由經 UNIX 紀元起經過的毫秒數值
+    },time); //time變數值是前面填入的0-3秒的隨機值
+  ;
+  }
+  //以上設計了makebox功能>>隨機時間內 調整box的形狀、位置、顏色、並記錄產生時間
+
+  function getRandomcolor(){
+    var max = 250;
+    var min = 50;
+    var gr = Math.floor(Math.random()* (max-min+1))+ min;
+
+    var color = "rgba(255,"+ gr +",243,1.0)";//注意變數不用引號
+    return color;
+    // console.log = gr;
+  }
+  //以上設定getRandomcolor功能
+  document.getElementById('box').onclick=function(){
+    this.style.display= "none";//點按後bix消失
+    clicktime=Date.now();
+    reacttime=(clicktime-creattime)/1000;
+    document.getElementById('time').innerHTML= reacttime;
+    makebox();
+  }
+  //點按box時紀錄時間，並修改id是time的span使其顯示反應時間 然後繼續再次呼叫makebox
+  makebox();
+  //首次呼叫malebox功能
+  </script>
+
+</body>
+</html>
